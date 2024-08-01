@@ -154,6 +154,7 @@ module.exports = (client) => class ChartSession {
 
   #callbacks = {
     seriesLoaded: [],
+    seriesCompleted: [],
     symbolLoaded: [],
     update: [],
 
@@ -239,6 +240,11 @@ module.exports = (client) => class ChartSession {
 
         if (packet.type === 'series_error') {
           this.#handleError('Series error:', packet.data[3]);
+          return;
+        }
+
+        if (packet.type === 'series_completed') {
+          this.#handleEvent('seriesCompleted');
           return;
         }
 
@@ -478,6 +484,10 @@ module.exports = (client) => class ChartSession {
    */
   onUpdate(cb) {
     this.#callbacks.update.push(cb);
+  }
+
+  onSeriesCompleted(cb) {
+    this.#callbacks.seriesCompleted.push(cb);
   }
 
   /**

@@ -4,7 +4,8 @@
   "description": "Tradingview instant stocks API, indicator alerts, trading bot, and more !",
   "main": "main.js",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "get-data": "node ./examples/FromToData.js"
   },
   "repository": {
     "type": "git",
